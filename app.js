@@ -4,9 +4,11 @@ const app = express();
 
 const PORT = process.env.PORT;
 
-app.get('/', (req, res) => {
-  res.send('Bookstore Inventory System - Ready to build!');
-});
+const bookController = require('./controllers/controller');
+
+app.set('view engine', 'ejs');
+
+app.get('/', bookController.getBooks);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
