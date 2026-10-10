@@ -9,5 +9,86 @@
     <%- include('navbar') %>
 
     <h1>Book Inventory</h1>
+    <h2>Dashboard</h2>
+    <div>
+      <div>
+        <h1>Overview</h1>
+        <div>A snapshot of your inventory</div>
+      </div>
+      <div>
+        <button>+ New Category</button>
+        <button>+ New Item</button>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <div><%= booksStates.total_books %></div>
+        <div>Total Items</div>
+      </div>
+      <div>
+        <div><%= booksStates.total_category %></div>
+        <div>Categories</div>
+      </div>
+      <div>
+        <div><%= booksStates.low_stock %></div>
+        <div>Low Stock</div>
+      </div>
+      <div>
+        <div><%= booksStates.out_of_stock %></div>
+        <div>Out of Stock</div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Needs Attention</h2>
+      <button>View all items</button>
+    </div>
+
+    <div>
+      <table>
+      <tbody>
+          <% needsAttention.slice(0, 5).forEach((book) => { %>
+          
+          <tr>
+            <td><!-- item icon here --></td>
+            <td>
+              <span><%= book.title %></span>
+            </td>
+            <td><%= book.category %></td>
+            <td><%= book.stock %></td>
+            <td>
+              <button>Restock</button>
+            </td>
+          </tr> 
+          
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h2>Recently Added</h2>
+    </div>
+
+    <div>
+      <table>
+        <tbody>
+          <% recentStock.slice(0, 5).forEach((book) => { %>
+          <tr>
+            <td><!-- item icon here --></td>
+            <td>
+              <span><%= book.title %></span>
+            </td>
+            <td><%= book.category %></td>
+            <td><%= book.price %></td>
+            <td>
+              <button>View</button>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

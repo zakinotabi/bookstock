@@ -1,5 +1,17 @@
 const queries = require('../db/queries');
 
+async function getBooksStatesRender(req, res) {
+  const count = await queries.getDashboardQuery();
+  const needsAtt = await queries.getNeedsAttQuery();
+  const recent = await queries.getRecentStockQuery();
+
+  res.render('home', {
+    booksStates: count[0],
+    needsAttention: needsAtt,
+    recentStock: recent,
+  });
+}
+
 async function getBooksRender(req, res) {
   const books = await queries.getAllBooksQuery();
   // res.send(`Books in inventory: ${JSON.stringify(books)}`);
@@ -12,6 +24,7 @@ async function getBooksCatRender(req, res) {
 }
 
 module.exports = {
+  getBooksStatesRender,
   getBooksRender,
   getBooksCatRender,
 };
