@@ -19,9 +19,10 @@ async function getBooksCatRender(req, res) {
 }
 
 async function getBooksRender(req, res) {
+  const categories = await queries.getAllBooksCatQuery();
   const books = await queries.getAllBooksQuery();
-  // res.send(`Books in inventory: ${JSON.stringify(books)}`);
-  res.render('books', { booksList: books });
+
+  res.render('books', { booksList: books, categoriesList: categories });
 }
 
 module.exports = {

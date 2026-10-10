@@ -10,12 +10,75 @@
   
     <h2>All Books</h2>
 
-<ul>
-  <% booksList.forEach(book => { %>
-    <li>
-      <strong><%= book.title %></strong> by <%= book.author %> - $<%= book.price %>
-    </li>
-  <% }); %>
-</ul>
+
+<div>
+  <div>
+    <h1>All Items</h1>
+    <div><%= booksList.length %> Books across <%= categoriesList.length %> categories</div>
+  </div>
+  <button>+ New Item</button>
+</div>
+
+<div>
+  <div>
+    <input type="text" placeholder="Search items...">
+  </div>
+  <select>
+    <option>Category: All</option>
+    <% categoriesList.forEach(item => { %>
+    <option><%= item.category %></option>
+    <% }); %>
+  </select>
+  <select>
+    <option>Sort: Newest</option>
+    <option>Sort: Name</option>
+    <option>Sort: Price</option>
+  </select>
+</div>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% booksList.forEach(book => { %>
+      <tr>
+        <td>          
+          <span><%= book.title %></span>
+        </td>
+        <td><%= book.author %></td>
+        <td><%= book.category %></td>
+        <td>$ <%= book.price %></td>
+        <td><%= book.stock %> item</td>
+        <td>
+          <div>
+            <button>View</button>
+            <button>Edit</button>
+            <button>🗑</button>
+          </div>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <button>‹ Prev</button>
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button>Next ›</button>
+</div>
+    
+
 </body>
 </html>
