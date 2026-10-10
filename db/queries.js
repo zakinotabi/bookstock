@@ -29,7 +29,14 @@ async function getAllBooksQuery() {
 }
 
 async function getAllBooksCatQuery() {
-  const { rows } = await pool.query('SELECT DISTINCT category FROM books ORDER BY category ASC');
+  const catQuery = `
+  SELECT category,
+  COUNT(*) AS total_in_stock 
+  FROM books 
+  GROUP BY category 
+  ORDER BY category ASC
+  `;
+  const { rows } = await pool.query(catQuery);
   return rows;
 }
 

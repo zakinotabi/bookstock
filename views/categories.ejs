@@ -10,13 +10,35 @@
   
     <h2>Categories</h2>
 
-<ul>
-  <% categoriesList.forEach(item => { %>
+
+<div>
+  <div>
+    <h1>Categories</h1>
+    <div><%= categoriesList.length %> Categories</div>
+    <div><%= allBooks.length %> Books</div>
+  </div>
+  <button>New category</button>
+</div>
+<div>
+
+  <div>
+    <div class="search"><input type="text" placeholder="Search categories..."></div>
+  </div>
+</div>
+<div>
+<% categoriesList.forEach(item => { %>
+  <div>
+    <div><%= item.category %></div>
+    <div><%= item.total_in_stock %> Books</div>
+    <div>
+      <button>Open</button>
+      <button>Edit</button>
+    </div>
+  </div>
+<% }); %>
+</div>
+
     
-    <li>
-      <strong><%= item.category %></strong>
-    </li>
-  <% }); %>
-</ul>
+
 </body>
 </html>

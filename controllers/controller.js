@@ -12,15 +12,16 @@ async function getBooksStatesRender(req, res) {
   });
 }
 
+async function getBooksCatRender(req, res) {
+  const categories = await queries.getAllBooksCatQuery();
+  const allBooks = await queries.getAllBooksQuery();
+  res.render('categories', { categoriesList: categories, allBooks: allBooks });
+}
+
 async function getBooksRender(req, res) {
   const books = await queries.getAllBooksQuery();
   // res.send(`Books in inventory: ${JSON.stringify(books)}`);
   res.render('books', { booksList: books });
-}
-async function getBooksCatRender(req, res) {
-  const categories = await queries.getAllBooksCatQuery();
-  // res.send(`Books in inventory: ${JSON.stringify(books)}`);
-  res.render('categories', { categoriesList: categories });
 }
 
 module.exports = {
