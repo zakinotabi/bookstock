@@ -8,6 +8,9 @@ const homeRouter = require('./routes/homeRouter');
 const categoryRouter = require('./routes/categoryRouter');
 const bookRouter = require('./routes/bookRouter');
 
+// This middleware parses incoming URL-encoded form data (like from <form>)
+app.use(express.urlencoded({ extended: true }));
+
 // Configuration
 app.set('view engine', 'ejs');
 

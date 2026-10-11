@@ -4,7 +4,7 @@ async function getDashboardQuery() {
   const dashQuery = `
   SELECT
   COUNT (*) AS total_books,
-  COUNT (DISTINCT category) AS total_category,
+  COUNT (DISTINCT category_id) AS total_category,
   COUNT (CASE WHEN stock > 0 AND stock < 5 THEN 1 END) AS low_stock,
   COUNT (CASE WHEN stock = 0 THEN 1 END) AS out_of_stock
   FROM books
@@ -30,13 +30,24 @@ async function getAllBooksQuery() {
 
 async function getAllBooksCatQuery() {
   const catQuery = `
-  SELECT category,
-  COUNT(*) AS total_in_stock 
-  FROM books 
-  GROUP BY category 
-  ORDER BY category ASC
+  SELECT
+  categories.*,
+  (SELECT COUNT(*) FROM books WHERE books.category_id = categories.id) AS total_in_stock
+  FROM categories
+  ORDER BY name ASC
   `;
   const { rows } = await pool.query(catQuery);
+  return rows;
+}
+
+async function addCategory(name) {
+  const insertCat = 'INSERT INTO categories (name) VALUES ($1) RETURNING *;';
+  const { rows } = await pool.query(insertCat, [name]);
+  return rows;
+}
+async function editCategory(oldName, newName) {
+  const editCat = 'UPDATE categories SET name = $1 WHERE name = $2 RETURNING *';
+  const { rows } = await pool.query(editCat, [newName, oldName]);
   return rows;
 }
 
@@ -46,6 +57,8 @@ module.exports = {
   getRecentStockQuery,
   getAllBooksQuery,
   getAllBooksCatQuery,
+  addCategory,
+  editCategory,
 };
 
 // WHY { rows }

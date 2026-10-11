@@ -4,5 +4,7 @@ const categoryController = require('../controllers/controller');
 
 // Mounted at '/categories' in app.js
 categoryRouter.get('/', categoryController.getBooksCatRender);
+categoryRouter.post('/add', categoryController.sendAddCatData);
+categoryRouter.post('/edit', categoryController.sendEditCatData);
 
 module.exports = categoryRouter;

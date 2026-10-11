@@ -3,42 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Categories</title>
 </head>
 <body>
   <%- include('navbar') %>
   
-    <h2>Categories</h2>
-
+  <h1>Categories</h1>
+  
 
 <div>
   <div>
-    <h1>Categories</h1>
     <div><%= categoriesList.length %> Categories</div>
     <div><%= allBooks.length %> Books</div>
   </div>
-  <button>New category</button>
+ 
+  <button id="openNewModalBtn">New category</button>
 </div>
-<div>
 
+<div>
   <div>
     <div class="search"><input type="text" placeholder="Search categories..."></div>
   </div>
 </div>
+
 <div>
 <% categoriesList.forEach(item => { %>
   <div>
-    <div><%= item.category %></div>
+    <div><%= item.name %></div>
     <div><%= item.total_in_stock %> Books</div>
     <div>
       <button>Open</button>
-      <button>Edit</button>
+     
+      <button class="editBtn" data-id="<%= item.id %>" data-category="<%= item.name %>">Edit</button>
     </div>
   </div>
 <% }); %>
 </div>
 
-    
+
+<!-- Add Category Modal -->
+<dialog id="addModal">
+  <form action="/categories/add" method="POST">
+    <h3>Add New Category</h3>
+
+    <div>
+      <label for="addCategoryInput">Category Name:</label>
+      <input type="text" id="addCategoryInput" name="category" required placeholder="Enter category name">
+    </div>
+
+    <div>
+      <button type="button" id="closeAddBtn">Cancel</button>
+      <button type="submit">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Edit Category Modal -->
+<dialog id="editModal">
+  <form action="/categories/edit" method="POST">
+    <h3>Edit Category</h3>
+
+    <input type="hidden" id="editCategoryId" name="oldCategory">
+
+    <div>
+      <label for="editCategoryInput">Category Name:</label>
+      <input type="text" id="editCategoryInput" name="newCategory" required>
+    </div>
+
+    <div>
+      <button type="button" id="closeEditBtn">Cancel</button>
+      <button type="submit">Update</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+  const addModal = document.getElementById('addModal');
+  const editModal = document.getElementById('editModal');
+  const addInput = document.getElementById('addCategoryInput');
+  const currentCategory = document.getElementById('editCategoryId');
+  const editNameInput = document.getElementById('editCategoryInput');
+
+  // Add modal
+  document.getElementById('openNewModalBtn').addEventListener('click', () => {
+    addInput.value = '';
+    addModal.showModal();
+  });
+
+  document.getElementById('closeAddBtn').addEventListener('click', () => {
+    addModal.close();
+  });
+
+  // Edit modal
+document.querySelectorAll('.editBtn').forEach(button => {
+  button.addEventListener('click', (e) => {
+   editNameInput.value = e.currentTarget.dataset.category;
+    currentCategory.value = e.currentTarget.dataset.category
+    editModal.showModal();
+  });
+});
+  document.getElementById('closeEditBtn').addEventListener('click', () => {
+    editModal.close();
+  });
+</script>
 
 </body>
 </html>

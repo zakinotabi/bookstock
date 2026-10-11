@@ -15,17 +15,38 @@ async function getBooksStatesRender(req, res) {
 async function getBooksCatRender(req, res) {
   const categories = await queries.getAllBooksCatQuery();
   const allBooks = await queries.getAllBooksQuery();
-  res.render('categories', { categoriesList: categories, allBooks: allBooks });
+
+  res.render('categories', {
+    categoriesList: categories,
+    allBooks: allBooks,
+  });
 }
 
 async function getBooksRender(req, res) {
   const categories = await queries.getAllBooksCatQuery();
   const books = await queries.getAllBooksQuery();
 
-  res.render('books', { booksList: books, categoriesList: categories });
+  res.render('books', {
+    booksList: books,
+    categoriesList: categories,
+  });
+}
+
+async function sendAddCatData(req, res) {
+  const { category } = req.body;
+  await queries.addCategory(category);
+  res.redirect('/categories');
+}
+
+async function sendEditCatData(req, res) {
+  const { oldCategory, newCategory } = req.body;
+  await queries.editCategory(oldCategory, newCategory);
+  res.redirect('/categories');
 }
 
 module.exports = {
+  sendEditCatData,
+  sendAddCatData,
   getBooksStatesRender,
   getBooksRender,
   getBooksCatRender,
