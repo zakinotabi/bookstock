@@ -4,7 +4,7 @@ const bookController = require('../controllers/controller');
 
 // So '/' here means '/books'
 bookRouter.get('/', bookController.getBooksRender);
-
-// bookRouter.get('/edit', bookController.getEditBookForm);
+bookRouter.post('/add', bookController.sendAddBookData);
+bookRouter.post('/edit', bookController.sendEditBookData);
 
 module.exports = bookRouter;

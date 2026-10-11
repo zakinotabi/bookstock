@@ -44,7 +44,21 @@ async function sendEditCatData(req, res) {
   res.redirect('/categories');
 }
 
+async function sendAddBookData(req, res) {
+  const { title, author, categoryId, price, stock } = req.body;
+  await queries.addBook(title, author, categoryId, price, stock);
+  res.redirect('/books');
+}
+
+async function sendEditBookData(req, res) {
+  const { currentBookId, title, author, categoryId, price, stock } = req.body;
+  await queries.editBook(currentBookId, title, author, categoryId, price, stock);
+  res.redirect('/books');
+}
+
 module.exports = {
+  sendEditBookData,
+  sendAddBookData,
   sendEditCatData,
   sendAddCatData,
   getBooksStatesRender,
