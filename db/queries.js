@@ -71,7 +71,14 @@ async function editBook(currentBookId, title, author, categoryId, price, stock) 
   return rows;
 }
 
+async function deleteBook(currentBookId) {
+  const updateBook = 'DELETE FROM books WHERE id = $1';
+  const { rows } = await pool.query(updateBook, [currentBookId]);
+  return rows;
+}
+
 module.exports = {
+  deleteBook,
   editBook,
   addBook,
   getDashboardQuery,

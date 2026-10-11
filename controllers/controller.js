@@ -56,7 +56,14 @@ async function sendEditBookData(req, res) {
   res.redirect('/books');
 }
 
+async function sendDeleteBookData(req, res) {
+  const { currentBookId } = req.body;
+  await queries.deleteBook(currentBookId);
+  res.redirect('/books');
+}
+
 module.exports = {
+  sendDeleteBookData,
   sendEditBookData,
   sendAddBookData,
   sendEditCatData,

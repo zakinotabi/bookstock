@@ -6,5 +6,6 @@ const bookController = require('../controllers/controller');
 bookRouter.get('/', bookController.getBooksRender);
 bookRouter.post('/add', bookController.sendAddBookData);
 bookRouter.post('/edit', bookController.sendEditBookData);
+bookRouter.post('/delete', bookController.sendDeleteBookData);
 
 module.exports = bookRouter;

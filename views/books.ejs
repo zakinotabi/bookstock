@@ -68,7 +68,9 @@
             data-category-id="<%= book.category_id %>"
             data-price="<%= book.price %>"
             data-stock="<%= book.stock %>">Edit</button>
-            <button>🗑</button>
+            <button class="deleteBtn"
+  data-id="<%= book.id %>"
+  data-title="<%= book.title %>">🗑</button>
           </div>
         </td>
       </tr>
@@ -169,10 +171,27 @@
   </form>
 </dialog>
 
+<!-- Delete Book Modal -->
+<dialog id="deleteModal">
+  <form action="/books/delete" method="POST">
+    <h3>Remove Book</h3>
+
+    <input type="hidden" id="deleteBookId" name="currentBookId">
+
+    <p>Remove "<span id="deleteBookTitle"></span>" Book? Are you sure?</p>
+
+    <div>
+      <button type="button" id="closeDeleteBtn">Cancel</button>
+      <button type="submit">Delete</button>
+    </div>
+  </form>
+</dialog>
+
 </body>
 <script>
   const addModal = document.getElementById('addModal');
   const addForm = addModal.querySelector('form');
+  
   const editModal = document.getElementById('editModal');
   const editIdInput = document.getElementById('editBookId');
   const editTitleInput = document.getElementById('editTitleInput');
@@ -181,6 +200,11 @@
   const editPriceInput = document.getElementById('editPriceInput');
   const editStockInput = document.getElementById('editStockInput');
 
+  const deleteModal = document.getElementById('deleteModal');
+  const deleteIdInput = document.getElementById('deleteBookId');
+  const deleteTitleSpan = document.getElementById('deleteBookTitle');
+
+  // add event
   document.getElementById('openNewModalBtn').addEventListener('click', () => {
     addForm.reset();
     addModal.showModal();
@@ -191,7 +215,7 @@
   });
 
 
-
+// edit event
 document.querySelectorAll('.editBtn').forEach(button => {
   button.addEventListener('click', (e) => {
     const d = e.currentTarget.dataset;
@@ -207,6 +231,21 @@ document.querySelectorAll('.editBtn').forEach(button => {
 
 document.getElementById('closeEditBtn').addEventListener('click', () => {
   editModal.close();
+});
+
+
+// delete event
+document.querySelectorAll('.deleteBtn').forEach(button => {
+  button.addEventListener('click', (e) => {
+    const d = e.currentTarget.dataset;
+    deleteIdInput.value = d.id;
+    deleteTitleSpan.textContent = d.title;
+    deleteModal.showModal();
+  });
+});
+
+document.getElementById('closeDeleteBtn').addEventListener('click', () => {
+  deleteModal.close();
 });
 </script>
 </html>
