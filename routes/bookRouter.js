@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const bookRouter = Router();
-const bookController = require('../controllers/controller');
+const bookController = require('../controllers/books');
 
 // So '/' here means '/books'
 bookRouter.get('/', bookController.getBooksRender);

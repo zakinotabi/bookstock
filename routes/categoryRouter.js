@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const categoryRouter = Router();
-const categoryController = require('../controllers/controller');
+const categoryController = require('../controllers/category');
 
 // Mounted at '/categories' in app.js
 categoryRouter.get('/', categoryController.getBooksCatRender);

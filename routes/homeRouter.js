@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const homeRouter = Router();
-const bookController = require('../controllers/controller');
+const homeController = require('../controllers/home');
 
 // So '/' here means '/books'
-homeRouter.get('/', bookController.getBooksStatesRender);
+homeRouter.get('/', homeController.getBooksStatesRender);
 
 module.exports = homeRouter;

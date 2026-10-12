@@ -3,92 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Book Inventory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/home.css" />
   </head>
   <body>
     <%- include('navbar') %>
 
-    <h1>Book Inventory</h1>
-    <h2>Dashboard</h2>
-    <div>
-      <div>
-        <h1>Overview</h1>
-        <div>A snapshot of your inventory</div>
-      </div>
-      <div>
-        <button>+ New Category</button>
-        <button>+ New Item</button>
-      </div>
-    </div>
+    <main id="home-page">
+      <h1 class="page-title">Book Inventory</h1>
+      <h2 class="page-subtitle">Dashboard</h2>
 
-    <div>
-      <div>
-        <div><%= booksStates.total_books %></div>
-        <div>Total Items</div>
-      </div>
-      <div>
-        <div><%= booksStates.total_category %></div>
-        <div>Categories</div>
-      </div>
-      <div>
-        <div><%= booksStates.low_stock %></div>
-        <div>Low Stock</div>
-      </div>
-      <div>
-        <div><%= booksStates.out_of_stock %></div>
-        <div>Out of Stock</div>
-      </div>
-    </div>
+      <section id="overview">
+        <div class="overview-heading">
+          <h1 class="overview-title">Overview</h1>
+          <div class="overview-text">A snapshot of your inventory</div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn">+ New Category</button>
+          <button class="btn btn-primary">+ New Item</button>
+        </div>
+      </section>
 
-    <div>
-      <h2>Needs Attention</h2>
-      <button>View all items</button>
-    </div>
+      <section id="stats">
+        <div class="stat-card">
+          <div class="stat-value"><%= booksStates.total_books %></div>
+          <div class="stat-label">Total Items</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value"><%= booksStates.total_category %></div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-card stat-low">
+          <div class="stat-value"><%= booksStates.low_stock %></div>
+          <div class="stat-label">Low Stock</div>
+        </div>
+        <div class="stat-card stat-out">
+          <div class="stat-value"><%= booksStates.out_of_stock %></div>
+          <div class="stat-label">Out of Stock</div>
+        </div>
+      </section>
 
-    <div>
-      <table>
-      <tbody>
-          <% needsAttention.slice(0, 5).forEach((book) => { %>
-          
-          <tr>
-            <td><!-- item icon here --></td>
-            <td>
-              <span><%= book.title %></span>
-            </td>
-            <td><%= book.category %></td>
-            <td><%= book.stock %></td>
-            <td>
-              <button>Restock</button>
-            </td>
-          </tr> 
-          
-          <% }); %>
-        </tbody>
-      </table>
-    </div>
+      <section id="needs-attention">
+        <div class="section-header">
+          <h2>Needs Attention</h2>
+          <button class="btn btn-link">View all items</button>
+        </div>
+        <div class="table-wrap">
+          <table class="items-table">
+            <tbody>
+              <% needsAttention.slice(0, 5).forEach((book) => { %>
+              <tr>
+                <td class="cell-icon"><span class="item-icon" aria-hidden="true"></span></td>
+                <td class="cell-title"><span><%= book.title %></span></td>
+                <td class="cell-category"><%= book.category %></td>
+                <td class="cell-number">
+                  <span class="stock-badge <%= book.stock == 0 ? 'is-out' : 'is-low' %>"><%= book.stock %></span>
+                </td>
+                <td class="cell-action"><button class="btn btn-small">Restock</button></td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-    <div>
-      <h2>Recently Added</h2>
-    </div>
-
-    <div>
-      <table>
-        <tbody>
-          <% recentStock.slice(0, 5).forEach((book) => { %>
-          <tr>
-            <td><!-- item icon here --></td>
-            <td>
-              <span><%= book.title %></span>
-            </td>
-            <td><%= book.category %></td>
-            <td><%= book.price %></td>
-            <td>
-              <button>View</button>
-            </td>
-          </tr>
-          <% }); %>
-        </tbody>
-      </table>
-    </div>
+      <section id="recently-added">
+        <div class="section-header">
+          <h2>Recently Added</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="items-table">
+            <tbody>
+              <% recentStock.slice(0, 5).forEach((book) => { %>
+              <tr>
+                <td class="cell-icon"><span class="item-icon" aria-hidden="true"></span></td>
+                <td class="cell-title"><span><%= book.title %></span></td>
+                <td class="cell-category"><%= book.category %></td>
+                <td class="cell-number"><%= book.price %></td>
+                <td class="cell-action"><button class="btn btn-small">View</button></td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

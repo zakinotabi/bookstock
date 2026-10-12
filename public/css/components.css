@@ -1,0 +1,267 @@
+/* components.css — shared pieces for the Books and Categories pages
+   (page layout, buttons, toolbar, tables, badges, modals, forms). */
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.page-heading {
+  font-size: 2.25rem;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+
+.page-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.page-summary {
+  color: var(--muted);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 500;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+.btn:hover {
+  background: #2b303d;
+  border-color: #3a4152;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+.btn-primary:hover {
+  background: #e2b668;
+  border-color: #e2b668;
+}
+
+.btn-danger {
+  background: rgba(224, 112, 122, 0.15);
+  border-color: rgba(224, 112, 122, 0.4);
+  color: var(--danger);
+}
+.btn-danger:hover {
+  background: rgba(224, 112, 122, 0.25);
+  border-color: var(--danger);
+}
+
+.btn-small {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.875rem;
+}
+
+/* ---------- Toolbar (search + filters) ---------- */
+.toolbar {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.toolbar .search {
+  flex: 1 1 260px;
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+}
+.input::placeholder {
+  color: var(--muted);
+}
+.input:focus,
+.select:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+.toolbar .select {
+  width: auto;
+  min-width: 11rem;
+}
+.select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* ---------- Table ---------- */
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.items-table th {
+  text-align: left;
+  padding: 0.8rem 1rem;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+  white-space: nowrap;
+}
+.items-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+.items-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.items-table tbody tr:hover td {
+  background: var(--surface-2);
+}
+
+.cell-title {
+  font-weight: 500;
+}
+.cell-muted {
+  color: var(--muted);
+}
+.cell-number {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.cell-action {
+  width: 1%;
+  white-space: nowrap;
+}
+.row-actions {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.stock-badge {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  background: rgba(255, 255, 255, 0.06);
+}
+.stock-badge.is-low {
+  background: rgba(224, 162, 74, 0.15);
+  color: var(--warn);
+}
+.stock-badge.is-out {
+  background: rgba(224, 112, 122, 0.15);
+  color: var(--danger);
+}
+
+/* ---------- Pagination ---------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.page-btn {
+  min-width: 2.25rem;
+  padding: 0.4rem 0.7rem;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.page-btn:hover {
+  color: var(--text);
+  border-color: #3a4152;
+}
+.page-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+/* ---------- Modals ---------- */
+.modal {
+  width: min(440px, calc(100% - 2rem));
+  padding: 0;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+.modal::backdrop {
+  background: rgba(5, 6, 9, 0.7);
+  backdrop-filter: blur(3px);
+}
+
+.modal-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modal-title {
+  font-size: 1.5rem;
+}
+.modal-text {
+  margin: 0;
+  color: var(--muted);
+}
+.modal-text span {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.form-group label {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 1.25rem 1rem 3rem;
+  }
+  .page-heading {
+    font-size: 1.8rem;
+  }
+  .toolbar .select {
+    flex: 1 1 140px;
+  }
+}

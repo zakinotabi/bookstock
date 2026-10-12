@@ -1,0 +1,54 @@
+/* categories.css — page-specific styles for Categories */
+.summary-group {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.summary-chip {
+  padding: 0.35rem 0.8rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+#categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.category-card:hover {
+  background: var(--surface-2);
+  border-color: #3a4152;
+  border-left-color: var(--accent);
+}
+
+.category-name {
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.category-count {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.category-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}

@@ -1,0 +1,49 @@
+/* base.css — shared tokens + reset. Load first on every page. */
+:root {
+  --bg: #12141a;
+  --surface: #1a1d25;
+  --surface-2: #222631;
+  --line: #2d3240;
+  --text: #e7e4dc;
+  --muted: #8f95a3;
+  --accent: #d6a756;
+  --accent-ink: #1a1405;
+  --warn: #e0a24a;
+  --danger: #e0707a;
+  --radius: 10px;
+  --font-body: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-head: 'Newsreader', Georgia, 'Times New Roman', serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

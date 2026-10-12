@@ -1,0 +1,18 @@
+/* books.css — page-specific touches for All Books */
+#books-page .cell-title {
+  min-width: 12rem;
+}
+#books-page .col-name {
+  width: 28%;
+}
+
+.btn-icon {
+  padding: 0.3rem 0.55rem;
+  line-height: 1;
+}
+
+@media (max-width: 800px) {
+  #books-page .items-table {
+    min-width: 720px;
+  } /* scroll sideways instead of squashing */
+}
