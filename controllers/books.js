@@ -29,9 +29,29 @@ async function sendDeleteBookData(req, res) {
   res.redirect('/books');
 }
 
+async function filterBooksByCatRender(req, res) {
+  const { id } = req.params;
+  const books = await booksQueries.getBooksByCatQuery(id);
+  res.render('partials/booksTable', {
+    booksList: books,
+  });
+}
+
+async function viewBooksByCatRender(req, res) {
+  const { id } = req.params;
+  const categories = await categoryQueries.getAllBooksCatQuery();
+  const books = await booksQueries.getBooksByCatQuery(id);
+  res.render('books', {
+    booksList: books,
+    categoriesList: categories,
+  });
+}
+
 module.exports = {
   sendDeleteBookData,
   sendEditBookData,
   sendAddBookData,
   getBooksRender,
+  filterBooksByCatRender,
+  viewBooksByCatRender,
 };

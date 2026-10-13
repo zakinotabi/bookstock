@@ -1,0 +1,42 @@
+      <table class="items-table" id="books-table">
+        <thead>
+          <tr>
+            <th class="col-name">Name</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% booksList.forEach(book => { %>
+          <tr>
+            <td class="cell-title">
+              <span><%= book.title %></span>
+            </td>
+            <td class="cell-muted"><%= book.author %></td>
+            <td class="cell-muted"><%= book.category_name %></td>
+            <td class="cell-number">$ <%= book.price %></td>
+            <td class="cell-number">
+              <span class="stock-badge <%= book.stock == 0 ? 'is-out' : (book.stock <= 5 ? 'is-low' : '') %>"><%= book.stock %> item</span>
+            </td>
+            <td class="cell-action">
+              <div class="row-actions">
+                <button class="btn btn-small">View</button>
+                <button class="btn btn-small editBtn"
+                  data-id="<%= book.id %>"
+                  data-title="<%= book.title %>"
+                  data-author="<%= book.author %>"
+                  data-category-id="<%= book.category_id %>"
+                  data-price="<%= book.price %>"
+                  data-stock="<%= book.stock %>">Edit</button>
+                <button class="btn btn-small btn-danger btn-icon deleteBtn"
+                  data-id="<%= book.id %>"
+                  data-title="<%= book.title %>" aria-label="Delete <%= book.title %>">🗑</button>
+              </div>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>

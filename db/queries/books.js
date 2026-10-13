@@ -1,7 +1,11 @@
 const pool = require('../pool');
 
 async function getAllBooksQuery() {
-  const { rows } = await pool.query('SELECT * FROM books');
+  const { rows } = await pool.query(`
+    SELECT books.*, categories.name AS category_name
+    FROM books
+    LEFT JOIN categories ON categories.id = books.category_id
+  `);
   return rows;
 }
 
@@ -32,9 +36,21 @@ async function deleteBook(currentBookId) {
   return rows;
 }
 
+async function getBooksByCatQuery(categoryId) {
+  const filter = `
+    SELECT books.*, categories.name AS category_name
+    FROM books
+    LEFT JOIN categories ON categories.id = books.category_id
+    WHERE books.category_id = $1
+  `;
+  const { rows } = await pool.query(filter, [categoryId]);
+  return rows;
+}
+
 module.exports = {
   getAllBooksQuery,
   deleteBook,
   editBook,
   addBook,
+  getBooksByCatQuery,
 };

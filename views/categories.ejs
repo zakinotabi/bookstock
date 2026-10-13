@@ -38,7 +38,9 @@
         <div class="category-name"><%= item.name %></div>
         <div class="category-count"><%= item.total_in_stock %> Books</div>
         <div class="category-actions">
+          <a href="/books/category/view/<%= item.id %>">
           <button class="btn btn-small">Open</button>
+          </a>
           <button class="btn btn-small editBtn" data-id="<%= item.id %>" data-category="<%= item.name %>">Edit</button>
         </div>
       </div>
