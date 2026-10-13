@@ -91,6 +91,13 @@
   gap: 1rem;
   margin-bottom: 2.5rem;
 }
+#stats a,
+#stats a:visited,
+#stats a:active {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Ensures the whole card acts as a clickable block */
+}
 
 .stat-card {
   background: var(--surface);
@@ -98,7 +105,9 @@
   border-radius: var(--radius);
   padding: 1.1rem 1.25rem;
 }
-
+.stat-card:link {
+  text-decoration: none;
+}
 .stat-value {
   font-family: var(--font-head);
   font-size: 2rem;
@@ -121,6 +130,17 @@
 }
 .stat-card.stat-out .stat-value {
   color: var(--danger);
+}
+
+#stats .stat-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#stats a:hover .stat-card {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.193);
 }
 
 /* ---------- Section headers ---------- */

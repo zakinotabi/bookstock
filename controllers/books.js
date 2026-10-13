@@ -20,6 +20,8 @@ async function sendAddBookData(req, res) {
 async function sendEditBookData(req, res) {
   const { currentBookId, title, author, categoryId, price, stock } = req.body;
   await booksQueries.editBook(currentBookId, title, author, categoryId, price, stock);
+
+  const books = await booksQueries.getAllBooksQuery();
   res.redirect('/books');
 }
 
@@ -31,7 +33,9 @@ async function sendDeleteBookData(req, res) {
 
 async function filterBooksByCatRender(req, res) {
   const { id } = req.params;
-  const books = await booksQueries.getBooksByCatQuery(id);
+
+  const books = id === 'all' ? await booksQueries.getAllBooksQuery() : await booksQueries.getBooksByCatQuery(id);
+
   res.render('partials/booksTable', {
     booksList: books,
   });

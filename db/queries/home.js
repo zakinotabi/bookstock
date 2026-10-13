@@ -4,7 +4,7 @@ async function getDashboardQuery() {
   const dashQuery = `
   SELECT
   COUNT (*) AS total_books,
-  COUNT (DISTINCT category_id) AS total_category,
+  (SELECT COUNT(*) FROM categories) AS total_category,
   COUNT (CASE WHEN stock > 0 AND stock < 5 THEN 1 END) AS low_stock,
   COUNT (CASE WHEN stock = 0 THEN 1 END) AS out_of_stock
   FROM books
@@ -14,12 +14,22 @@ async function getDashboardQuery() {
 }
 
 async function getNeedsAttQuery() {
-  const { rows } = await pool.query('SELECT * FROM books WHERE stock < 10 ORDER BY stock ASC');
+  const { rows } = await pool.query(`
+    SELECT books.*, categories.name AS category_name
+    FROM books
+    LEFT JOIN categories ON categories.id = books.category_id
+    ORDER BY stock ASC
+    `);
   return rows;
 }
 
 async function getRecentStockQuery() {
-  const { rows } = await pool.query('SELECT * FROM books ORDER BY id DESC');
+  const { rows } = await pool.query(`
+    SELECT books.*, categories.name AS category_name
+    FROM books
+    LEFT JOIN categories ON categories.id = books.category_id
+    ORDER BY id DESC
+    `);
   return rows;
 }
 

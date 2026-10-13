@@ -1,0 +1,16 @@
+<!-- Add Category Modal -->
+<dialog class="modal" id="addModal">
+  <form class="modal-form" action="/categories/add" method="POST">
+    <h3 class="modal-title">Add New Category</h3>
+
+    <div class="form-group">
+      <label for="addCategoryInput">Category Name:</label>
+      <input class="input" type="text" id="addCategoryInput" name="category" required placeholder="Enter category name" />
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" type="button" id="closeAddBtn">Cancel</button>
+      <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+  </form>
+</dialog>

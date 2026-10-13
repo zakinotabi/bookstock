@@ -1,0 +1,41 @@
+  <dialog class="modal" id="editModal">
+    <form class="modal-form" id="editForm" action="/books/edit" method="POST">
+      <h3 class="modal-title">Edit Book</h3>
+
+      <input type="hidden" id="editBookId" name="currentBookId">
+
+      <div class="form-group">
+        <label for="editTitleInput">Title:</label>
+        <input class="input" type="text" id="editTitleInput" name="title" required>
+      </div>
+
+      <div class="form-group">
+        <label for="editAuthorInput">Author:</label>
+        <input class="input" type="text" id="editAuthorInput" name="author" required>
+      </div>
+
+      <div class="form-group">
+        <label for="editCategorySelect">Category:</label>
+        <select class="select" id="editCategorySelect" name="categoryId" required>
+          <% categoriesList.forEach(item => { %>
+            <option value="<%= item.id %>"><%= item.name %></option>
+          <% }); %>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="editPriceInput">Price:</label>
+        <input class="input" type="number" id="editPriceInput" name="price" required min="0" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="editStockInput">Stock:</label>
+        <input class="input" type="number" id="editStockInput" name="stock" required min="0" step="1">
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn" type="button" id="closeEditBtn">Cancel</button>
+        <button class="btn btn-primary" type="submit">Update</button>
+      </div>
+    </form>
+  </dialog>

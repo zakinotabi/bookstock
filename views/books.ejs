@@ -62,191 +62,38 @@
     </div>
   </main>
 
-  <!-- Add Book Modal -->
-  <dialog class="modal" id="addModal">
-    <form class="modal-form" action="/books/add" method="POST">
-      <h3 class="modal-title">Add New Book</h3>
+  
+<!-- View Book Modal -->
+  <%- include('partials/viewBookModal') %>
 
-      <div class="form-group">
-        <label for="addTitleInput">Title:</label>
-        <input class="input" type="text" id="addTitleInput" name="title" required placeholder="Enter book title">
-      </div>
+<!-- Add Book Modal -->
+  <%- include('partials/addBookModal') %>
 
-      <div class="form-group">
-        <label for="addAuthorInput">Author:</label>
-        <input class="input" type="text" id="addAuthorInput" name="author" required placeholder="Enter author name">
-      </div>
+<!-- Edit Book Modal -->
+  <%- include('partials/editBookModal') %>
 
-      <div class="form-group">
-        <label for="addCategorySelect">Category:</label>
-        <select class="select" id="addCategorySelect" name="categoryId" required>
-          <option value="" disabled selected>Select a category</option>
-          <% categoriesList.forEach(item => { %>
-            <option value="<%= item.id %>"><%= item.name %></option>
-          <% }); %>
-        </select>
-      </div>
+<!-- Delete Book Modal -->
+  <%- include('partials/deleteBookModal') %>
 
-      <div class="form-group">
-        <label for="addPriceInput">Price:</label>
-        <input class="input" type="number" id="addPriceInput" name="price" required min="0" step="0.01" placeholder="0.00">
-      </div>
 
-      <div class="form-group">
-        <label for="addStockInput">Stock:</label>
-        <input class="input" type="number" id="addStockInput" name="stock" required min="0" step="1" placeholder="0">
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn" type="button" id="closeAddBtn">Cancel</button>
-        <button class="btn btn-primary" type="submit">Save</button>
-      </div>
-    </form>
-  </dialog>
-
-  <!-- Edit Book Modal -->
-  <dialog class="modal" id="editModal">
-    <form class="modal-form" action="/books/edit" method="POST">
-      <h3 class="modal-title">Edit Book</h3>
-
-      <input type="hidden" id="editBookId" name="currentBookId">
-
-      <div class="form-group">
-        <label for="editTitleInput">Title:</label>
-        <input class="input" type="text" id="editTitleInput" name="title" required>
-      </div>
-
-      <div class="form-group">
-        <label for="editAuthorInput">Author:</label>
-        <input class="input" type="text" id="editAuthorInput" name="author" required>
-      </div>
-
-      <div class="form-group">
-        <label for="editCategorySelect">Category:</label>
-        <select class="select" id="editCategorySelect" name="categoryId" required>
-          <% categoriesList.forEach(item => { %>
-            <option value="<%= item.id %>"><%= item.name %></option>
-          <% }); %>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="editPriceInput">Price:</label>
-        <input class="input" type="number" id="editPriceInput" name="price" required min="0" step="0.01">
-      </div>
-
-      <div class="form-group">
-        <label for="editStockInput">Stock:</label>
-        <input class="input" type="number" id="editStockInput" name="stock" required min="0" step="1">
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn" type="button" id="closeEditBtn">Cancel</button>
-        <button class="btn btn-primary" type="submit">Update</button>
-      </div>
-    </form>
-  </dialog>
-
-  <!-- Delete Book Modal -->
-  <dialog class="modal" id="deleteModal">
-    <form class="modal-form" action="/books/delete" method="POST">
-      <h3 class="modal-title">Remove Book</h3>
-
-      <input type="hidden" id="deleteBookId" name="currentBookId">
-
-      <p class="modal-text">Remove "<span id="deleteBookTitle"></span>" Book? Are you sure?</p>
-
-      <div class="modal-actions">
-        <button class="btn" type="button" id="closeDeleteBtn">Cancel</button>
-        <button class="btn btn-danger" type="submit">Delete</button>
-      </div>
-    </form>
-  </dialog>
 
 <script>
-  const addModal = document.getElementById('addModal');
-  const addForm = addModal.querySelector('form');
-
-  const editModal = document.getElementById('editModal');
-  const editIdInput = document.getElementById('editBookId');
-  const editTitleInput = document.getElementById('editTitleInput');
-  const editAuthorInput = document.getElementById('editAuthorInput');
-  const editCategorySelect = document.getElementById('editCategorySelect');
-  const editPriceInput = document.getElementById('editPriceInput');
-  const editStockInput = document.getElementById('editStockInput');
-
-  const deleteModal = document.getElementById('deleteModal');
-  const deleteIdInput = document.getElementById('deleteBookId');
-  const deleteTitleSpan = document.getElementById('deleteBookTitle');
 
   // add event
-  document.getElementById('openNewModalBtn').addEventListener('click', () => {
-    addForm.reset();
-    addModal.showModal();
-  });
-
-  document.getElementById('closeAddBtn').addEventListener('click', () => {
-    addModal.close();
-  });
+  <%- include('partials/scripts/addBook.js') %>
 
   // edit event
-  document.querySelectorAll('.editBtn').forEach(button => {
-    button.addEventListener('click', (e) => {
-      const d = e.currentTarget.dataset;
-      editIdInput.value = d.id;
-      editTitleInput.value = d.title;
-      editAuthorInput.value = d.author;
-      editCategorySelect.value = d.categoryId;
-      editPriceInput.value = d.price;
-      editStockInput.value = d.stock;
-      editModal.showModal();
-    });
-  });
-
-  document.getElementById('closeEditBtn').addEventListener('click', () => {
-    editModal.close();
-  });
+  <%- include('partials/scripts/editBook.js') %>
 
   // delete event
-  document.querySelectorAll('.deleteBtn').forEach(button => {
-    button.addEventListener('click', (e) => {
-      const d = e.currentTarget.dataset;
-      deleteIdInput.value = d.id;
-      deleteTitleSpan.textContent = d.title;
-      deleteModal.showModal();
-    });
-  });
+  <%- include('partials/scripts/deleteBook.js') %>
 
-  document.getElementById('closeDeleteBtn').addEventListener('click', () => {
-    deleteModal.close();
-  });
+// view event
+  <%- include('partials/scripts/viewBook.js') %>
 
-
-  // filter category event
-
-document.getElementById('category-select').addEventListener('change', async (e) => {
-  const categoryId = e.target.value;
-const response = await fetch(`/books/category/filter/${categoryId}`);
-  const html = await response.text();
-
-  document.getElementById('books-table').innerHTML = html;
-  // if (categoryId === 'all') {
-  //   window.location.href = '/books';
-  // } else {
-  //   window.location.href = `/books/category/${categoryId}`;
-  // }
-});
-
-  // document.getElementById('category-select').addEventListener('change', async (e) => {
-  //   const categoryId = e.target.value;
-    
-  //   // const response = await fetch(`/books/category/${categoryId}`);
-  //     window.location.href = `/books/category/${categoryId}`;
   
-  //   // const tableHtml = await response.text();
-    
-  //   // document.getElementById('table-container').innerHTML = tableHtml;
-  // });
+// filter category event
+  <%- include('partials/scripts/filterCategory.js') %>
 
 </script>
 </body>

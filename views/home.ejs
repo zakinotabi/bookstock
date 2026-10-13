@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/base.css" />
     <link rel="stylesheet" href="/css/navbar.css" />
     <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/components.css" />
   </head>
   <body>
     <%- include('navbar') %>
@@ -23,35 +24,42 @@
           <h1 class="overview-title">Overview</h1>
           <div class="overview-text">A snapshot of your inventory</div>
         </div>
-        <div class="action-buttons">
-          <button class="btn">+ New Category</button>
-          <button class="btn btn-primary">+ New Item</button>
-        </div>
+
       </section>
 
       <section id="stats">
+        <a href="/books/">
         <div class="stat-card">
           <div class="stat-value"><%= booksStates.total_books %></div>
           <div class="stat-label">Total Items</div>
         </div>
+        </a>
+        <a href="/books/">
         <div class="stat-card">
           <div class="stat-value"><%= booksStates.total_category %></div>
           <div class="stat-label">Categories</div>
         </div>
+      </a>
+
+        <a href="/books/">
         <div class="stat-card stat-low">
           <div class="stat-value"><%= booksStates.low_stock %></div>
           <div class="stat-label">Low Stock</div>
         </div>
+        </a>
+        <a href="/books/">
         <div class="stat-card stat-out">
           <div class="stat-value"><%= booksStates.out_of_stock %></div>
           <div class="stat-label">Out of Stock</div>
         </div>
+      </a>
       </section>
 
       <section id="needs-attention">
         <div class="section-header">
           <h2>Needs Attention</h2>
-          <button class="btn btn-link">View all items</button>
+          <a href="/books/"><button class="btn btn-link">View all items</button></a>
+          
         </div>
         <div class="table-wrap">
           <table class="items-table">
@@ -60,11 +68,19 @@
               <tr>
                 <td class="cell-icon"><span class="item-icon" aria-hidden="true"></span></td>
                 <td class="cell-title"><span><%= book.title %></span></td>
-                <td class="cell-category"><%= book.category %></td>
+                <td class="cell-category"><%= book.category_name %></td>
                 <td class="cell-number">
                   <span class="stock-badge <%= book.stock == 0 ? 'is-out' : 'is-low' %>"><%= book.stock %></span>
                 </td>
-                <td class="cell-action"><button class="btn btn-small">Restock</button></td>
+                <td class="cell-action">
+                  <button class="btn btn-small editBtn"
+                  data-id="<%= book.id %>"
+                  data-title="<%= book.title %>"
+                  data-author="<%= book.author %>"
+                  data-category-id="<%= book.category_id %>"
+                  data-price="<%= book.price %>"
+                  data-stock="<%= book.stock %>">Restock</button>
+                </td>
               </tr>
               <% }); %>
             </tbody>
@@ -83,15 +99,38 @@
               <tr>
                 <td class="cell-icon"><span class="item-icon" aria-hidden="true"></span></td>
                 <td class="cell-title"><span><%= book.title %></span></td>
-                <td class="cell-category"><%= book.category %></td>
+                <td class="cell-category"><%= book.category_name %></td>
                 <td class="cell-number"><%= book.price %></td>
-                <td class="cell-action"><button class="btn btn-small">View</button></td>
+                <td class="cell-action">
+                <button class="btn btn-small viewBtn"
+                  data-title="<%= book.title %>"
+                  data-author="<%= book.author %>"
+                  data-category="<%= book.category_name %>"
+                  data-price="<%= book.price %>"
+                  data-stock="<%= book.stock %>">View</button>
+              </td>
               </tr>
               <% }); %>
             </tbody>
           </table>
         </div>
+        
+        <!-- Edit Book Modal For Restock -->
+        <%- include('partials/editBookModal') %>
+
+        <!-- View Book Modal -->
+        <%- include('partials/viewBookModal') %>
+      
+      
       </section>
     </main>
   </body>
+<script>
+
+  // edit event for restock
+  <%- include('partials/scripts/editBook.js') %>
+
+  // View Book Modal
+  <%- include('partials/scripts/viewBook.js') %>
+</script>
 </html>

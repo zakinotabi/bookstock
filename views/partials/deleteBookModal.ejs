@@ -1,0 +1,14 @@
+<dialog class="modal" id="deleteModal">
+  <form class="modal-form" action="/books/delete" method="POST">
+    <h3 class="modal-title">Remove Book</h3>
+
+    <input type="hidden" id="deleteBookId" name="currentBookId" />
+
+    <p class="modal-text">Remove "<span id="deleteBookTitle"></span>" Book? Are you sure?</p>
+
+    <div class="modal-actions">
+      <button class="btn" type="button" id="closeDeleteBtn">Cancel</button>
+      <button class="btn btn-danger" type="submit">Delete</button>
+    </div>
+  </form>
+</dialog>

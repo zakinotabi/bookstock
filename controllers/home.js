@@ -1,14 +1,18 @@
 const homeQueries = require('../db/queries/home');
+const categoryQueries = require('../db/queries/category');
 
 async function getBooksStatesRender(req, res) {
   const count = await homeQueries.getDashboardQuery();
   const needsAtt = await homeQueries.getNeedsAttQuery();
   const recent = await homeQueries.getRecentStockQuery();
 
+  const categories = await categoryQueries.getAllBooksCatQuery();
+
   res.render('home', {
     booksStates: count[0],
     needsAttention: needsAtt,
     recentStock: recent,
+    categoriesList: categories,
   });
 }
 
