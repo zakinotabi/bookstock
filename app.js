@@ -4,6 +4,10 @@ const app = express();
 const PORT = process.env.PORT;
 const path = require('path');
 
+// Import Neon and connect using your environment variable
+const { neon } = require('@neondatabase/serverless');
+const sql = neon(process.env.DATABASE_URL);
+
 // Import Routers
 const homeRouter = require('./routes/homeRouter');
 const categoryRouter = require('./routes/categoryRouter');
