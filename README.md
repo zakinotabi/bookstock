@@ -1,6 +1,6 @@
-# bookstock# BookStock 📚
+# BookStock
 
-A simple book inventory website I built for The Odin Project's [Inventory Application](https://www.theodinproject.com/lessons/node-path-nodejs-inventory-application) lesson.
+A simple book inventory website.
 
 It has full CRUD (create, read, update, delete) and category filtering as a bonus. I didn't have time to add search or other filters.
 
